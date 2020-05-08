@@ -382,16 +382,15 @@
           var message = $("#message").val();
           $.ajax({
               type: "POST",
-              url: "process.php",
+              url: "/process.php",
               data: "name=" + name + "&email=" + email + "&message=" + message,
-              success : function(text){
-                  if (text == "success"){
-                      formSuccess();
-                    } else {
+              success : function(data){
+                      formSuccess(data);
+                    }, 
+              error : function(data){
                       formError();
-                      submitMSG(false,text);
-                    }
-                }
+                      submitMSG(false,data);
+                    },
             });
         }
         function formSuccess(){
