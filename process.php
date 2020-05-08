@@ -5,7 +5,7 @@
 	$message = $_POST["message"];
 	// $message = str_replace("\n.", "\n..", $message);
 	$EmailTo = "diogo.av.justino@gmail.com"; 
-	$Subject = "Portfolio CV/Resume";
+	$Subject = "Portfolio /Resume";
 	 
 	// prepare email body text
 	
@@ -40,11 +40,11 @@
         "from" => array(
             "email" => $FromEmail
         ),
-        "subject" => $subject,
+        "subject" => $Subject,
         "content" => array(
             array(
                 "type" => "text/html",
-                "value" => $body
+                "value" => $Body
             )
         )
     );
