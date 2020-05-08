@@ -5,14 +5,9 @@
 	$message = $_POST["message"];
 	// $message = str_replace("\n.", "\n..", $message);
 	$EmailTo = "diogo.av.justino@gmail.com"; 
-	$Subject = "Portfolio /Resume";
+	$Subject = "Portfolio-Resume";
 	 
-	// prepare email body text
-	
-	$Body .= "Name: ";
-	$Body .= $name;
-	$Body .= "\n"; 
-	 
+	// prepare email body text	 
 	$Body .= "Email: ";
 	$Body .= $email;
 	$Body .= "\n";
@@ -48,7 +43,7 @@
             )
         )
     );
-
+	echo 'test123';
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, "https://api.sendgrid.com/v3/mail/send");
     curl_setopt($ch, CURLOPT_POST, 1);
