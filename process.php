@@ -1,9 +1,10 @@
 <?php
+require 'assets/sendgrid-php/sendgrid-php.php'
 	$name = $_POST["name"];
-	$email = $_POST["email"];
+	$FromEmail = $_POST["email"];
 	$message = $_POST["message"];
 	// $message = str_replace("\n.", "\n..", $message);
-	$EmailTo = "diogo.av.justino@gmail.com"; // change with your email
+	$EmailTo = "diogo.av.justino@gmail.com"; 
 	$Subject = "Portfolio CV/Resume";
 	 
 	// prepare email body text
@@ -19,15 +20,22 @@
 	$Body .= "Message: ";
 	$Body .= $message;
 	$Body .= "\n";
-	
-	
 	// send email
-	$success = mail($EmailTo, $Subject, $Body, "From:".$email);
-	 
-	// redirect to success page
-	if ($success){
-	   echo "success";
-	}else{
-	    echo "invalid";
-	} 
+	$email = new \SendGrid\Mail\Mail();
+	$email->setFrom($FromEmail, $name);
+	$email->setSubject($Subject);
+	$email->addTo($EmailTo, "Diogo");
+	$email->addContent($Body);
+
+	$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+	try {
+    	$response = $sendgrid->send($email);
+    	print $response->statusCode() . "\n";
+    	print_r($response->headers());
+    	print $response->body() . "\n";
+	} catch (Exception $e) {
+    	echo 'Caught exception: '. $e->getMessage() ."\n";
+	}
 ?>
+
+
