@@ -365,7 +365,6 @@
         
       $("#contactForm").validator().on("submit", function (event) {
         $("#msgSubmit").remove();
-        $("#contactForm").prepend($("<div></div>").attr("id","msgSubmit").addClass("h3 text-center"))
           if (event.isDefaultPrevented()) {
             // handle the invalid form...
             formError();
@@ -410,6 +409,7 @@
           } else {
             var msgClasses = "h3 text-center shake animated text-danger";
           }
+          $("#contactForm").prepend($("<div></div>").attr("id","msgSubmit").addClass("h3 text-center"))
           $("#msgSubmit").removeClass().addClass(msgClasses).text(msg);
           
         }
