@@ -21,17 +21,45 @@
 	$Body .= $message;
 	$Body .= "\n";
 	 
-	
-	// send email
-	$success = mail($EmailTo, $Subject, $Body, "From:".$email);
-	 
-	// redirect to success page
-	if ($success){
-	   echo "success";
-	}else{
-	    echo "invalid";
-	} 
-?>
+	$headers = array(
+        'Authorization: Bearer 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',
+        'Content-Type: application/json'
+    );
+
+    $data = array(
+        "personalizations" => array(
+            array(
+                "to" => array(
+                    array(
+                        "email" => $EmailTo,
+                        "name" => "diogo"
+                    )
+                )
+            )
+        ),
+        "from" => array(
+            "email" => $FromEmail
+        ),
+        "subject" => $subject,
+        "content" => array(
+            array(
+                "type" => "text/html",
+                "value" => $body
+            )
+        )
+    );
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://api.sendgrid.com/v3/mail/send");
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    echo $response;
 ?>
 
 
