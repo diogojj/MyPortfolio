@@ -27,7 +27,7 @@ require 'assets/sendgrid-php/sendgrid-php.php'
 	$email->addTo($EmailTo, "Diogo");
 	$email->addContent($Body);
 
-	$sendgrid = new \SendGrid(getenv('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'));
+	$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 	try {
     	$response = $sendgrid->send($email);
     	echo $response->statusCode() . "\n";
