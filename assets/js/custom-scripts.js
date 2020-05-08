@@ -393,9 +393,9 @@
                     },
             });
         }
-        function formSuccess(){
+        function formSuccess(data){
             $("#contactForm")[0].reset();
-            submitMSG(true, "Message Sent!")
+            submitMSG(true, "Message Sent!" + data)
         }
     	  function formError(){   
     	    $("#contactForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
