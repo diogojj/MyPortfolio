@@ -1,5 +1,5 @@
 <?php
-  	include 'assets/sendgrid-php/sendgrid-php.php';
+  	require 'vendor/autoload.php';
 	$Name = $_POST["name"];
 	$FromEmail = $_POST["email"];
 	$message = $_POST["message"];
@@ -11,49 +11,24 @@
 	$Body .= "Message: ";
 	$Body .= $message;
 	$Body .= "\n";
-	 
-	$headers = array(
-        'Authorization: Bearer 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',
-        'Content-Type: application/json'
-    );
 
-    $data = array(
-        "personalizations" => array(
-            array(
-                "to" => array(
-                    array(
-                        "email" => $EmailTo,
-                        "name" => "diogo"
-                    )
-                )
-            )
-        ),
-        "from" => array(
-            "email" => $FromEmail
-        ),
-        "subject" => $Subject,
-        "content" => array(
-            array(
-                "type" => "text/html",
-                "value" => $Body
-            )
-        )
+    $email = new \SendGrid\Mail\Mail();
+    $email->setFrom($FromEmail, $Name);
+    $email->setSubject("Sending with Twilio SendGrid is Fun");
+    $email->addTo($EmailTo, "diogo");
+    $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
+    $email->addContent(
+    "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
     );
-    echo 'test123';
-    echo '' . $Name;
-    echo ' '. $FromEmail;
-    echo ' '. $message;
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://api.sendgrid.com/v3/mail/send");
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $response = curl_exec($ch);
-    curl_close($ch);
-
-    echo $response;
+    $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+    try {
+    $response = $sendgrid->send($email);
+        print $response->statusCode() . "\n";
+        print_r($response->headers());
+        print $response->body() . "\n";
+    } catch (Exception $e) {
+        echo 'Caught exception: '. $e->getMessage() ."\n";
+    }
 ?>
 
 
