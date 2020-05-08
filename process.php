@@ -39,10 +39,13 @@
             )
         )
     );
-	echo 'test123';
+    echo 'test123';
+    echo '' . $Name;
+    echo ' '. $FromEmail;
+    echo ' '. $message;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, "https://api.sendgrid.com/v3/mail/send");
-    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
