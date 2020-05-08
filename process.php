@@ -1,6 +1,6 @@
 <?php
-require 'assets/sendgrid-php/sendgrid-php.php'
-	$name = $_POST["name"];
+  	require 'assets/sendgrid-php/sendgrid-php.php';
+	$Name = $_POST["name"];
 	$FromEmail = $_POST["email"];
 	$message = $_POST["message"];
 	// $message = str_replace("\n.", "\n..", $message);
@@ -21,12 +21,13 @@ require 'assets/sendgrid-php/sendgrid-php.php'
 	$Body .= $message;
 	$Body .= "\n";
 	// send email
-	$email = new \SendGrid\Mail\Mail();
+	echo 'test1';
+	$email->new \SendGrid\Mail\Mail();
 	$email->setFrom($FromEmail, $name);
 	$email->setSubject($Subject);
 	$email->addTo($EmailTo, "Diogo");
 	$email->addContent($Body);
-
+	echo 'test2';
 	$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 	try {
     	$response = $sendgrid->send($email);
