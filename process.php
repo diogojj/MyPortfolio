@@ -8,10 +8,6 @@
 	$Subject = "Portfolio-Resume";
 	 
 	// prepare email body text	 
-	$Body .= "Email: ";
-	$Body .= $email;
-	$Body .= "\n";
-	 
 	$Body .= "Message: ";
 	$Body .= $message;
 	$Body .= "\n";
