@@ -27,7 +27,7 @@
 }
 
 .mh-about-tag ul li span {
-  border: 1px solid #2196F3;
+  border: 1px solid #00B530;
 }
 
 .mh-about-tag ul li span:hover {
@@ -183,7 +183,7 @@
 }
 
 .btn.btn-fill {
-  background-color: #2196F3;
+  background-color: #00B530;
 }
 
 .mh-pricing .mh-pricing .fa {

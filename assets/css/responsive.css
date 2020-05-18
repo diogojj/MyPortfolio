@@ -337,6 +337,9 @@
     padding-top: 50px;
     padding-right: 20px;
   }
+  .line-separator-m{
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -443,9 +446,7 @@
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: vertical;
-    -webkit-box-direction: reverse;
-        -ms-flex-direction: column-reverse;
-            flex-direction: column-reverse;
+
   }
   .mh-header {
     padding: 0;
