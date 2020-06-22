@@ -1,11 +1,11 @@
 <?php
   	require 'vendor/autoload.php';
-	$Name = $_POST["name"];
+    $Name = $_POST["name"];
 	$FromEmail = $_POST["email"];
 	$message = $_POST["message"];
 	// $message = str_replace("\n.", "\n..", $message);
 	$EmailTo = "diogo.av.justino@gmail.com"; 
-	$Subject = "Portfolio-Resume";
+	$Subject = $_POST["subject"];;
 	 
 	// prepare email body text	 
 	$Body .= "Message: ";
@@ -14,12 +14,9 @@
 
     $email = new \SendGrid\Mail\Mail();
     $email->setFrom($FromEmail, $Name);
-    $email->setSubject("Sending with Twilio SendGrid is Fun");
+    $email->setSubject($Subject);
     $email->addTo($EmailTo);
-    $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
-    $email->addContent(
-    "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
-    );
+    $email->addContent("text/plain", $Body);
     $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
     try {
     $response = $sendgrid->send($email);

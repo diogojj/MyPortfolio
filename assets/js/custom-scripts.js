@@ -378,12 +378,13 @@
     
         function submitForm(){
           var name = $("#name").val();
+          var subject = $("#subject").val();
           var email = $("#email").val();
           var message = $("#message").val();
           $.ajax({
               type: "POST",
               url: "/process.php",
-              data: "name=" + name + "&email=" + email + "&message=" + message,
+              data: "name=" + name +  "subject=" + subject + "&email=" + email + "&message=" + message,
               success : function(data){
                       formSuccess(data);
                     }, 
