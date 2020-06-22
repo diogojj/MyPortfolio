@@ -18,10 +18,8 @@
     $email->addTo($EmailTo);
     $email->addContent("text/plain", $Body);
     $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
-    echo getenv('SENDGRID_API_KEY');
     try {
     $response = $sendgrid->send($email);
-    echo $response ;
     } catch (Exception $e) {
         echo 'Caught exception: '. $e->getMessage() ."\n";
     }
