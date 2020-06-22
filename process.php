@@ -5,7 +5,7 @@
 	$message = $_POST["message"];
 	// $message = str_replace("\n.", "\n..", $message);
 	$EmailTo = "diogo.av.justino@gmail.com"; 
-	$Subject = $_POST["subject"];;
+	$Subject = $_POST["subject"];
 	 
 	// prepare email body text	 
 	$Body .= "Message: ";
